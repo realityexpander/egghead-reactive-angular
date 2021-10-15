@@ -59,7 +59,7 @@ export function projectsReducers(
     case ProjectsActionTypes.AddProject:
       return adapter.addOne(action.payload, state);
     case ProjectsActionTypes.UpdateProject:
-      return adapter.updateOne(action.payload, state);
+      return adapter.upsertOne(action.payload, state);
     case ProjectsActionTypes.DeleteProject:
       return adapter.removeOne(action.payload, state);
     default:
