@@ -30,7 +30,12 @@ export class ProjectsComponent implements OnInit {
     private customerService: CustomersService,
     private store: Store<ProjectsState>,
     private ns: NotificationsService) {
-      this.projects$ = store.pipe(select(selectAllProjects));
+      // this.projects$ = store.pipe(select(selectAllProjects));
+      this.projects$ = store.pipe(
+        select('projects'),
+        map(data => data.entities),
+        map(data => Object.keys(data).map(k => data[k]))
+      );
     }
 
   ngOnInit() {
@@ -82,7 +87,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   deleteProject(project) {
-    this.store.dispatch(new DeleteProject(project));
+    this.store.dispatch(new DeleteProject(project.id));
 
     // These will go away
     this.ns.emit('Project deleted!');
