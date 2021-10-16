@@ -33,6 +33,7 @@ export class ProjectsComponent implements OnInit {
       // this.projects$ = store.pipe(select(selectAllProjects));
       this.projects$ = store.pipe(
         select('projects'),
+        // map((projectsState: ProjectsState) => projectsState.entities)
         map(data => data.entities),
         map(data => Object.keys(data).map(k => data[k]))
       );
