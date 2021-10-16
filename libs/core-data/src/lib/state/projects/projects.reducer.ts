@@ -59,7 +59,7 @@ export function projectsReducers(
     case ProjectsActionTypes.ProjectAdded:
       return adapter.addOne(action.payload, state);
     case ProjectsActionTypes.UpdateProject:
-      return adapter.updateOne({id: action.payload.id, changes: action.payload}, state);
+      return adapter.updateOne({ id: action.payload.id, changes: action.payload }, state);
     case ProjectsActionTypes.DeleteProject:
       return adapter.removeOne(action.payload.id, state);
     default:
@@ -70,8 +70,12 @@ export function projectsReducers(
 // Selectors
 export const getSelectedProjectId = (state: ProjectsState) => state.selectedProjectId;
 
-const { selectIds, selectEntities, selectAll } = adapter.getSelectors();
+export const {
+  selectIds: selectProjectIds,
+  selectEntities: selectProjectEntities,
+  selectAll: selectAllProjects
+} = adapter.getSelectors();
 
-export const selectProjectIds = selectIds;
-export const selectProjectEntities = selectEntities;
-export const selectAllProjects = selectAll;
+// export const selectProjectIds = selectIds;
+// export const selectProjectEntities = selectEntities;
+// export const selectAllProjects = selectAll;
